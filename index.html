@@ -39,6 +39,8 @@
       letter-spacing: 3px;
     }
 
+    .navbar li a, .navbar .navbar-brand { color: #fff !important; }
+
     .navbar-nav li a:hover, .navbar-nav li.active a {
       color: #0d6efd !important;
       background-color: #fff !important;
@@ -111,24 +113,12 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#about">ABOUT</a></li>
         <li><a href="#services">SERVICES</a></li>
-        <li><a href="#portfolio">COLLECTION</a></li>
-        <li><a href="#shop">SHOP</a></li>
-        <li><a href="#timeline">TIMELINE</a></li>
-        <li><a href="#feedback">FEEDBACK</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-        <li>
-          <a href="#" class="cart-icon" data-toggle="modal" data-target="#cartModal">
-            <span class="glyphicon glyphicon-shopping-cart"></span>
-            <span id="cartCount" class="cart-count">0</span>
-          </a>
-        </li>
-        <li><a href="#services">SERVICES</a></li>
-        <li><a href="#portfolio">COLLECTION</a></li>
         <li><a href="#shop">SHOP</a></li>
         <li><a href="#timeline">TIMELINE</a></li>
         <li><a href="#order-form">FORM</a></li>
         <li><a href="#blog">BLOG</a></li>
         <li><a href="#testimonials">TESTIMONIALS</a></li>
+        <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">CONTACT</a></li>
       </ul>
     </div>
@@ -154,7 +144,7 @@
   <div class="row">
     <div class="col-sm-8">
       <h2>About Hoobyland</h2><br>
-      <h4>At Hoobyland, we’re passionate about Gundam and the art of Gunpla building.</h4><br>
+      <h4>At Hoobyland, we're passionate about Gundam and the art of Gunpla building.</h4><br>
       <p>Founded by hobbyists, for hobbyists — we connect fans with high-quality model kits, exclusive collectibles, and rare imports from Japan.</p>
     </div>
 
@@ -189,6 +179,7 @@
     </div>
   </div>
 </div>
+
 <!-- SHOP -->
 <div id="shop" class="container-fluid text-center bg-grey fade-section">
   <h2>Shop</h2>
@@ -196,7 +187,6 @@
 
   <div class="row text-center">
 
-    <!-- Aerial Rebuild -->
     <div class="col-sm-3">
       <div class="thumbnail fade-section">
         <img src="images/aerial-rebuild.png" alt="Gundam Aerial">
@@ -206,7 +196,6 @@
       </div>
     </div>
 
-    <!-- Strike Freedom -->
     <div class="col-sm-3">
       <div class="thumbnail fade-section">
         <img src="images/strike-freedom-gundam.png" alt="Strike Freedom">
@@ -216,7 +205,6 @@
       </div>
     </div>
 
-    <!-- Exia Repair -->
     <div class="col-sm-3">
       <div class="thumbnail fade-section">
         <img src="images/exia-repairII-resized.jpg" alt="Gundam Exia">
@@ -226,7 +214,6 @@
       </div>
     </div>
 
-    <!-- Zaku -->
     <div class="col-sm-3">
       <div class="thumbnail fade-section">
         <img src="images/zakuII-resize.jpg" alt="Zaku II Char Custom">
@@ -246,7 +233,7 @@
   <div id="chart_div" style="width:100%; height:500px;"></div>
 </div>
 
-<!-- Google Charts Loader -->
+<!-- Google Charts -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script>
@@ -304,6 +291,7 @@
     Go to Order Form
   </a>
 </div>
+
 <!-- BLOG -->
 <div id="blog" class="container-fluid text-center bg-grey fade-section">
   <h2>Blog & News</h2>
@@ -313,21 +301,21 @@
     <div class="col-sm-4">
       <div class="blog-card fade-section" style="background:#1a1a1a; padding:15px; border-radius:5px;">
         <h4>New Limited Edition Release</h4>
-        <p>Discover our latest exclusive release of the MG 1/100 scale Gunpla… <a href="#">Read more</a></p>
+        <p>Discover our latest exclusive release… <a href="#">Read more</a></p>
       </div>
     </div>
 
     <div class="col-sm-4">
       <div class="blog-card fade-section" style="background:#1a1a1a; padding:15px; border-radius:5px;">
         <h4>Tips for Painting Your Kit</h4>
-        <p>Learn how to get that perfect panel lining and weathering effect… <a href="#">Read more</a></p>
+        <p>Learn how to get perfect weathering and panel lining… <a href="#">Read more</a></p>
       </div>
     </div>
 
     <div class="col-sm-4">
       <div class="blog-card fade-section" style="background:#1a1a1a; padding:15px; border-radius:5px;">
-        <h4>Upcoming Event in Sydney</h4>
-        <p>Join us for a Gunpla build-off event at our local collector’s meet… <a href="#">Read more</a></p>
+        <h4>Upcoming Sydney Event</h4>
+        <p>Join our Gunpla meet & build-off… <a href="#">Read more</a></p>
       </div>
     </div>
 
@@ -339,48 +327,29 @@
   <h2 class="text-center">Testimonials</h2>
 
   <div class="row">
-
     <div class="col-sm-4">
       <div class="testimonial fade-section" style="background:#1a1a1a; padding:20px; border-radius:5px;">
-        <p>“Hoobyland has the rarest kits I’ve ever seen — delivery to Australia was lightning fast.”</p>
+        <p>“Hoobyland has the rarest kits I’ve ever seen — delivery was lightning fast.”</p>
         <p><strong>— Alex J., Sydney</strong></p>
       </div>
     </div>
 
     <div class="col-sm-4">
       <div class="testimonial fade-section" style="background:#1a1a1a; padding:20px; border-radius:5px;">
-        <p>“The build quality photos and support from the team made my kit building experience so much better.”</p>
+        <p>“Their service and quality photos made my build so much easier!”</p>
         <p><strong>— Casey M., Melbourne</strong></p>
       </div>
     </div>
 
     <div class="col-sm-4">
       <div class="testimonial fade-section" style="background:#1a1a1a; padding:20px; border-radius:5px;">
-        <p>“Wishlist feature is awesome — I saved the next releases and got notified as soon as they dropped!”</p>
+        <p>“Wishlist notifications help me grab drops instantly.”</p>
         <p><strong>— Jordan L., Brisbane</strong></p>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- GANTT CHART SECTION -->
-<div id="timeline" class="container-fluid text-center bg-grey">
-  <h2>Hoobyland Project Timeline</h2>
-  <h4>Gundam Restock & Launch Schedule</h4>
-  <div id="chart_div" style="width: 100%; height: 500px;"></div>
-</div>
-
-<!-- FEEDBACK LINK -->
-<div id="feedback" class="container-fluid text-center">
-  <h2>Feedback</h2>
-  <h4>Help us improve your Hoobyland experience</h4>
-  <p>We moved our feedback form to a quick external link so it stays out of the way while you browse.</p>
-  <a class="btn btn-blue btn-lg" href="https://forms.gle/your-hoobyland-feedback" target="_blank" rel="noopener">
-    Open Feedback Form
-  </a>
-  <p style="margin-top:10px;color:#888;">Opens in a new tab.</p>
-</div>
 <!-- FAQ -->
 <div id="faq" class="container-fluid text-center fade-section">
   <h2>Frequently Asked Questions</h2>
@@ -388,17 +357,17 @@
 
     <div class="faq-item fade-section">
       <h4>Q: Do you ship internationally?</h4>
-      <p>A: Yes — we ship worldwide with secure international courier options.</p>
+      <p>A: Yes — we ship globally with secure couriers.</p>
     </div>
 
     <div class="faq-item fade-section">
-      <h4>Q: Are your kits genuine Bandai products?</h4>
-      <p>A: Absolutely. All our kits are official Bandai releases, sourced from Japan.</p>
+      <h4>Q: Are your kits genuine?</h4>
+      <p>A: Absolutely — all stock is official Bandai product.</p>
     </div>
 
     <div class="faq-item fade-section">
-      <h4>Q: Can I pre-order future releases?</h4>
-      <p>A: Yes — use the Order & Contact Form above or email us with your desired kit.</p>
+      <h4>Q: Do you accept pre-orders?</h4>
+      <p>A: Yes — fill out the order form or email us.</p>
     </div>
 
   </div>
@@ -422,7 +391,7 @@
   <p>© 2025 Hoobyland | Premium Gundam Collectibles</p>
 </footer>
 
-<!-- FADE-IN OBSERVER SCRIPT -->
+<!-- FADE-IN SCRIPT -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   document.body.classList.add('loaded');
@@ -434,27 +403,19 @@ document.addEventListener('DOMContentLoaded', function () {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.1 });
 
-  document.querySelectorAll('.fade-section').forEach(section => {
-    observer.observe(section);
-  });
+  document.querySelectorAll('.fade-section').forEach(el => observer.observe(el));
 });
 </script>
-<!-- OPTIONAL: SMOOTH SCROLL SCRIPT -->
+
+<!-- SMOOTH SCROLL -->
 <script>
-  // Smooth scroll for navbar links
   document.querySelectorAll('.navbar a, footer a[href="#myPage"]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      if (this.hash !== "") {
+    link.addEventListener('click', function(e) {
+      if (this.hash) {
         e.preventDefault();
-        const target = document.querySelector(this.hash);
-        if (target) {
-          window.scrollTo({
-            top: target.offsetTop - 50,
-            behavior: "smooth"
-          });
-        }
+        document.querySelector(this.hash).scrollIntoView({ behavior: "smooth" });
       }
     });
   });
@@ -462,7 +423,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 </body>
 </html>
-
-
 
 
