@@ -2,86 +2,173 @@
 <html lang="en">
 <head>
   <title>Hoobyland | Premium Gundam Collectibles & Model Kits</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:600|Lato:400" rel="stylesheet" type="text/css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:600|Lato:400" rel="stylesheet" type="text/css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
   <style>
-  body {
-    font: 400 15px Lato, sans-serif;
-    line-height: 1.8;
-    color: #d1d1d1;
-    background-color: #000;
-  }
-  h2, h4 { color: #0d6efd; }
-  .jumbotron {
-    background: linear-gradient(90deg, #000 0%, #001133 100%);
-    color: #fff;
-    padding: 100px 25px;
-    font-family: Montserrat, sans-serif;
-  }
-  .navbar {
-    margin-bottom: 0;
-    background-color: #0d6efd;
-    border: none;
-    letter-spacing: 3px;
-  }
-  .navbar li a, .navbar .navbar-brand { color: #fff !important; }
-  .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #0d6efd !important;
-    background-color: #fff !important;
-  }
-  .container-fluid { padding: 60px 50px; }
-  .bg-grey { background-color: #0b0b0b; }
-  .logo-small { color: #0d6efd; font-size: 50px; }
-  .thumbnail { border: none; background-color: transparent; }
-  .thumbnail img { width: 100%; border-radius: 5px; }
-  .btn-blue {
-    background-color: #0d6efd; border: none; color: white;
-  }
-  .btn-blue:hover {
-    background-color: white; color: #0d6efd; border: 1px solid #0d6efd;
-  }
-  .cart-icon { position: relative; display: inline-block; }
-  .cart-count {
-    position: absolute; top: -8px; right: -10px; background-color: #fff;
-    color: #0d6efd; border-radius: 50%; font-size: 12px; padding: 2px 6px;
-  }
-  footer { background-color: #000; color: #888; padding: 25px; }
-  footer a { color: #0d6efd; }
-  .modal-content { background-color: #0b0b0b; color: #fff; border: 1px solid #0d6efd; }
-  .modal-header { border-bottom: 1px solid #0d6efd; }
-  .cart-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 8px 0;
-    padding: 8px;
-    border-bottom: 1px solid #0d6efd22;
-  }
-  .cart-item img {
-    width: 50px;
-    border-radius: 5px;
-    margin-right: 10px;
-  }
-  .cart-text { flex: 1; }
-  .remove-btn {
-    color: red;
-    cursor: pointer;
-    font-weight: bold;
-    margin-left: 10px;
-  }
-  .remove-btn:hover { color: #ff5555; }
+    body {
+      font: 400 15px Lato, sans-serif;
+      line-height: 1.8;
+      color: #d1d1d1;
+      background-color: #000;
+      opacity: 0;
+      transition: background-color 0.3s, color 0.3s, opacity 0.6s;
+    }
+    body.loaded { opacity: 1; }
+    body.dark-mode {
+      background-color: #111;
+      color: #ccc;
+    }
+    h2, h4 { color: #0d6efd; }
+    .jumbotron {
+      background: linear-gradient(90deg, #000 0%, #001133 100%);
+      color: #fff;
+      padding: 100px 25px;
+      font-family: Montserrat, sans-serif;
+    }
+    .navbar {
+      margin-bottom: 0;
+      background-color: #0d6efd;
+      border: none;
+      letter-spacing: 3px;
+    }
+    .navbar li a, .navbar .navbar-brand { color: #fff !important; }
+    .navbar-nav li a:hover, .navbar-nav li.active a {
+      color: #0d6efd !important;
+      background-color: #fff !important;
+    }
+    .container-fluid { padding: 60px 50px; }
+    .bg-grey { background-color: #0b0b0b; }
+    .logo-small { color: #0d6efd; font-size: 50px; }
+    .thumbnail {
+      border: none;
+      background-color: transparent;
+      transition: transform 0.3s, opacity 0.6s;
+      opacity: 0;
+    }
+    .thumbnail.visible { opacity: 1; }
+    .thumbnail:hover { transform: translateY(-5px) scale(1.02); }
+    .thumbnail img { width: 100%; border-radius: 5px; }
+    .btn-blue {
+      background-color: #0d6efd;
+      border: none;
+      color: white;
+    }
+    .btn-blue:hover {
+      background-color: white;
+      color: #0d6efd;
+      border: 1px solid #0d6efd;
+    }
+    .cart-icon {
+      position: relative;
+      display: inline-block;
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background-color: #fff;
+      color: #0d6efd;
+      border-radius: 50%;
+      font-size: 12px;
+      padding: 2px 6px;
+    }
+    footer {
+      background-color: #000;
+      color: #888;
+      padding: 25px;
+    }
+    footer a { color: #0d6efd; }
+    .modal-content {
+      background-color: #0b0b0b;
+      color: #fff;
+      border: 1px solid #0d6efd;
+    }
+    .modal-header {
+      border-bottom: 1px solid #0d6efd;
+    }
+    .cart-item, .wishlist-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 8px 0;
+      padding: 8px;
+      border-bottom: 1px solid #0d6efd22;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .cart-item.visible, .wishlist-item.visible {
+      opacity: 1;
+    }
+    .cart-item img, .wishlist-item img {
+      width: 50px;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    .cart-text, .wishlist-text {
+      flex: 1;
+    }
+    .remove-btn {
+      color: red;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .remove-btn:hover {
+      color: #ff5555;
+    }
+    .navbar.dark-mode {
+      background-color: #003366;
+    }
+    .btn-blue.dark-mode {
+      background-color: #0055aa;
+    }
+    .testimonial, .faq-item, .blog-card {
+      opacity: 0;
+      transition: opacity 0.6s, transform 0.6s;
+      transform: translateY(20px);
+    }
+    .testimonial.visible, .faq-item.visible, .blog-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .testimonial {
+      background-color: #1a1a1a;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+    .faq-item {
+      margin: 15px 0;
+    }
+    .blog-card {
+      background-color: #1a1a1a;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 5px;
+      transition: box-shadow 0.3s;
+    }
+    .blog-card:hover {
+      box-shadow: 0 4px 8px #0d6efd22;
+    }
+    @media (max-width: 768px) {
+      .container-fluid {
+        padding: 30px 25px;
+      }
+      .jumbotron {
+        padding: 60px 15px;
+      }
+    }
   </style>
 </head>
-
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
-<!-- NAV -->
-<nav class="navbar navbar-default navbar-fixed-top">
+<!-- NAVBAR -->
+<nav class="navbar navbar-default navbar-fixed-top" id="mainNavbar">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -98,12 +185,20 @@
         <li><a href="#portfolio">COLLECTION</a></li>
         <li><a href="#shop">SHOP</a></li>
         <li><a href="#timeline">TIMELINE</a></li>
+        <li><a href="#order-form">FORM</a></li>
+        <li><a href="#blog">BLOG</a></li>
         <li><a href="#contact">CONTACT</a></li>
         <li>
           <a href="#" class="cart-icon" data-toggle="modal" data-target="#cartModal">
             <span class="glyphicon glyphicon-shopping-cart"></span>
             <span id="cartCount" class="cart-count">0</span>
           </a>
+        </li>
+        <li>
+          <a href="#" data-toggle="modal" data-target="#wishlistModal" title="Wishlist">⭐</a>
+        </li>
+        <li>
+          <a href="#" id="darkModeToggle" title="Toggle Dark Mode">🌙</a>
         </li>
       </ul>
     </div>
@@ -123,9 +218,8 @@
     </div>
   </form>
 </div>
-
 <!-- ABOUT -->
-<div id="about" class="container-fluid">
+<div id="about" class="container-fluid fade-section">
   <div class="row">
     <div class="col-sm-8">
       <h2>About Hoobyland</h2><br>
@@ -133,16 +227,15 @@
       <p>Founded by hobbyists, for hobbyists — we connect fans with high-quality model kits, exclusive collectibles, and rare imports from Japan.</p>
     </div>
     <div class="col-sm-4">
-      <img src="images/first-gundam.jpg" class="img-responsive" alt="the first gunpla">
+      <img src="images/first-gundam.jpg" class="img-responsive" alt="The first Gunpla">
     </div>
   </div>
 </div>
 
 <!-- SERVICES -->
-<div id="services" class="container-fluid text-center bg-grey">
+<div id="services" class="container-fluid text-center bg-grey fade-section">
   <h2>Our Services</h2>
-  <h4>What We Offer</h4>
-  <br>
+  <h4>What We Offer</h4><br>
   <div class="row">
     <div class="col-sm-4">
       <span class="glyphicon glyphicon-ok logo-small"></span>
@@ -159,9 +252,6 @@
       <h4>Exclusive Collectibles</h4>
       <p>Limited editions and pre-orders available here first.</p>
     </div>
-  </div>
-</div>
-
 <!-- SHOP -->
 <div id="shop" class="container-fluid text-center bg-grey">
   <h2>Shop</h2>
@@ -172,7 +262,7 @@
         <img src="images/aerial-rebuild.png" alt="Gundam Aerial" />
         <p><strong>Gundam Aerial</strong></p>
         <p>$59.00 AUD</p>
-        <button class="btn btn-blue" onclick="addToCart('Gundam Aerial', 59, 'https://static.bandai-hobby.net/gunpla/img/figure/1000189771_1.jpg')">Add to Cart</button>
+        <button class="btn btn-blue" onclick="addToCart('Gundam Aerial', 59, 'images/aerial-rebuild.png')">Add to Cart</button>
       </div>
     </div>
     <div class="col-sm-3">
@@ -180,7 +270,7 @@
         <img src="images/strike-freedom-gundam.png" alt="Strike Freedom">
         <p><strong>Strike Freedom Gundam</strong></p>
         <p>$79.00 AUD</p>
-        <button class="btn btn-blue" onclick="addToCart('Strike Freedom Gundam', 79, 'https://static.bandai-hobby.net/gunpla/img/figure/1000186822_1.jpg')">Add to Cart</button>
+        <button class="btn btn-blue" onclick="addToCart('Strike Freedom Gundam', 79, 'images/strike-freedom-gundam.png')">Add to Cart</button>
       </div>
     </div>
     <div class="col-sm-3">
@@ -201,166 +291,291 @@
     </div>
   </div>
 </div>
-
-<!-- CART MODAL -->
-<div id="cartModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" style="color:white;">&times;</button>
-        <h4 class="modal-title">Your Cart</h4>
-      </div>
-      <div class="modal-body">
-        <div id="cartItems"></div>
-        <h4 id="cartTotal">Total: $0.00 AUD</h4>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-blue" onclick="continueShopping()">Continue Shopping</button>
-        <button type="button" class="btn btn-blue" onclick="checkout()">Checkout</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CHECKOUT SUCCESS MODAL -->
-<div id="checkoutModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content text-center">
-      <div class="modal-header">
-        <h4 class="modal-title">✅ Order Confirmed</h4>
-      </div>
-      <div class="modal-body">
-        <p>Thank you for your purchase!</p>
-        <p>Your Gundam kits will be shipped soon.</p>
-      </div>
-      <div class="modal-footer text-center">
-        <button type="button" class="btn btn-blue" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- GANTT CHART SECTION -->
-<div id="timeline" class="container-fluid text-center bg-grey">
+<!-- TIMELINE -->
+<div id="timeline" class="container-fluid text-center bg-grey fade-section">
   <h2>Hoobyland Project Timeline</h2>
   <h4>Gundam Restock & Launch Schedule</h4>
-  <div id="chart_div" style="width: 100%; height: 500px;"></div>
+  <div id="chart_div" style="width:100%; height:500px;"></div>
 </div>
 
+<!-- Load Google Charts -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-google.charts.load('current', {'packages':['gantt']});
-google.charts.setOnLoadCallback(drawChart);
+  google.charts.load('current', {'packages':['gantt']});
+  google.charts.setOnLoadCallback(drawChart);
 
-function drawChart() {
-  var data = new google.visualization.DataTable();
-  data.addColumn('string', 'Task ID');
-  data.addColumn('string', 'Task Name');
-  data.addColumn('string', 'Resource');
-  data.addColumn('date', 'Start Date');
-  data.addColumn('date', 'End Date');
-  data.addColumn('number', 'Duration');
-  data.addColumn('number', 'Percent Complete');
-  data.addColumn('string', 'Dependencies');
-  data.addRows([
-    ['sourcing', 'Source New Gundam Models', 'Procurement',
-     new Date(2025, 9, 1), new Date(2025, 9, 10), null, 100, null],
-    ['shipping', 'Shipment from Japan', 'Logistics',
-     new Date(2025, 9, 11), new Date(2025, 9, 20), null, 70, 'sourcing'],
-    ['inspection', 'Quality Check & Photography', 'Operations',
-     new Date(2025, 9, 21), new Date(2025, 9, 25), null, 50, 'shipping'],
-    ['listing', 'Website Product Listing', 'Marketing',
-     new Date(2025, 9, 26), new Date(2025, 9, 29), null, 20, 'inspection'],
-    ['launch', 'Online Launch & Promotion', 'Sales',
-     new Date(2025, 9, 30), new Date(2025, 10, 5), null, 0, 'listing']
-  ]);
+  function drawChart() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Task ID');
+    data.addColumn('string', 'Task Name');
+    data.addColumn('string', 'Resource');
+    data.addColumn('date', 'Start Date');
+    data.addColumn('date', 'End Date');
+    data.addColumn('number', 'Duration');
+    data.addColumn('number', 'Percent Complete');
+    data.addColumn('string', 'Dependencies');
 
-  var options = {
-    height: 500,
-    gantt: {
-      trackHeight: 40,
-      labelStyle: { fontSize: 14, color: '#00aaff' },
-      barCornerRadius: 4
-    },
-    backgroundColor: '#111'
-  };
+    data.addRows([
+      ['sourcing', 'Source New Gundam Models', 'Procurement',
+       new Date(2025, 9, 1), new Date(2025, 9, 10), null, 100, null],
+      ['shipping', 'Shipment from Japan', 'Logistics',
+       new Date(2025, 9, 11), new Date(2025, 9, 20), null, 70, 'sourcing'],
+      ['inspection', 'Quality Check & Photography', 'Operations',
+       new Date(2025, 9, 21), new Date(2025, 9, 25), null, 50, 'shipping'],
+      ['listing', 'Website Product Listing', 'Marketing',
+       new Date(2025, 9, 26), new Date(2025, 9, 29), null, 20, 'inspection'],
+      ['launch', 'Online Launch & Promotion', 'Sales',
+       new Date(2025, 9, 30), new Date(2025, 10, 5), null, 0, 'listing']
+    ]);
 
-  var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
-  chart.draw(data, options);
-}
+    var options = {
+      height: 500,
+      gantt: {
+        trackHeight: 40,
+        labelStyle: { fontSize: 14, color: '#00aaff' },
+        barCornerRadius: 4
+      },
+      backgroundColor: '#111'
+    };
+    var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
 </script>
+<!-- ORDER FORM -->
+<div id="order-form" class="container-fluid text-center bg-grey fade-section" style="padding:60px 50px;">
+  <h2>Hoobyland Order & Contact</h2>
+  <h4>Pre-orders, custom builds, bulk orders, and general enquiries</h4><br>
+  <p>For all inquiries please refer to the link:</p>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSd1fMAI6sZO2Zdii0qvLvqhGibQ0S0DHPDVv7Q2IOPUMCT34A/viewform" 
+     target="_blank" 
+     class="btn btn-blue">
+    Go to Order Form
+  </a>
+</div>
+<!-- BLOG -->
+<div id="blog" class="container-fluid text-center bg-grey fade-section">
+  <h2>Blog & News</h2>
+  <h4>Latest from Hoobyland</h4>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="blog-card fade-section">
+        <h4>New Limited Edition Release</h4>
+        <p>Discover our latest exclusive release of the MG 1/100 scale Gunpla… <a href="#">Read more</a></p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="blog-card fade-section">
+        <h4>Tips for Painting Your Kit</h4>
+        <p>Learn how to get that perfect panel lining and weathering effect… <a href="#">Read more</a></p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="blog-card fade-section">
+        <h4>Upcoming Event in Sydney</h4>
+        <p>Join us for a Gunpla build-off event at our local collector’s meet… <a href="#">Read more</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div id="testimonials" class="container-fluid bg-grey fade-section">
+  <h2 class="text-center">Testimonials</h2>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="testimonial fade-section">
+        <p>“Hoobyland has the rarest kits I’ve ever seen — delivery to Australia was lightning fast.”</p>
+        <p><strong>— Alex J., Sydney</strong></p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="testimonial fade-section">
+        <p>“The build quality photos and support from the team made my kit building experience so much better.”</p>
+        <p><strong>— Casey M., Melbourne</strong></p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="testimonial fade-section">
+        <p>“Wishlist feature is awesome — I saved the next releases and got notified as soon as they dropped!”</p>
+        <p><strong>— Jordan L., Brisbane</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div id="faq" class="container-fluid text-center fade-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="col-sm-8 col-sm-offset-2 text-left">
+    <div class="faq-item fade-section">
+      <h4>Q: Do you ship internationally?</h4>
+      <p>A: Yes — we ship worldwide with secure international courier options.</p>
+    </div>
+    <div class="faq-item fade-section">
+      <h4>Q: Are your kits genuine Bandai products?</h4>
+      <p>A: Absolutely. All our kits are official Bandai releases, sourced from Japan.</p>
+    </div>
+    <div class="faq-item fade-section">
+      <h4>Q: Can I pre-order future releases?</h4>
+      <p>A: Yes — use the Order & Contact Form above or email us with your desired kit.</p>
+    </div>
+  </div>
+</div>
 
 <!-- CONTACT -->
-<div id="contact" class="container-fluid text-center bg-grey">
+<div id="contact" class="container-fluid text-center bg-grey fade-section">
   <h2>Contact Us</h2>
   <p><span class="glyphicon glyphicon-map-marker"></span> Sydney, Australia</p>
   <p><span class="glyphicon glyphicon-envelope"></span> support@hoobyland.com</p>
   <p><span class="glyphicon glyphicon-phone"></span> +61 499 499 714</p>
 </div>
 
-<footer class="text-center">
+<!-- FOOTER -->
+<footer class="container-fluid text-center fade-section">
   <a href="#myPage" title="To Top"><span class="glyphicon glyphicon-chevron-up"></span></a>
-  <p>© 2025 Hoobyland | Premium Gundam Collectibles</p>
-</footer>
-
-<script>
-let cart = [];
-
-function addToCart(name, price, image) {
-  cart.push({name, price, image});
-  updateCart();
-}
-
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  updateCart();
-}
-
-function updateCart() {
-  document.getElementById("cartCount").innerText = cart.length;
-  const container = document.getElementById("cartItems");
-  container.innerHTML = "";
-  let total = 0;
-  cart.forEach((item, i) => {
-    const div = document.createElement("div");
-    div.className = "cart-item";
-    div.innerHTML = `
-      <img src="${item.image}" alt="${item.name}">
-      <div class="cart-text">${item.name}<br>$${item.price.toFixed(2)} AUD</div>
-      <span class="remove-btn" onclick="removeFromCart(${i})">×</span>
-    `;
-    container.appendChild(div);
-    total += item.price;
-  });
-  document.getElementById("cartTotal").innerText = "Total: $" + total.toFixed(2) + " AUD";
-}
-
-function checkout() {
-  if (cart.length === 0) {
-    alert("Your cart is empty!");
-    return;
-  }
-  cart = [];
-  updateCart();
-  $("#cartModal").modal("hide");
-  $("#checkoutModal").modal("show");
-}
-
-function continueShopping() {
-  $("#cartModal").modal("hide");
-  document.getElementById("shop").scrollIntoView({ behavior: "smooth" });
-}
-</script>
-
-</body>
-</html>
-<footer class="container-fluid text-center">
-  <a href="#myPage" title="To Top">
-    <span class="glyphicon glyphicon-chevron-up"></span>
-  </a>
   <p>Scan our QR to visit Hoobyland</p>
   <img src="images/frame.png" alt="Hoobyland QR Code" width="150" height="150" style="margin:20px auto; display:block;">
-  <p>Bootstrap Theme Made By 
-    <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a>
-  </p>
+  <p>© 2025 Hoobyland | Premium Gundam Collectibles</p>
 </footer>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('loaded');
+    updateCart();
+    updateWishlistModal();
+  });
+
+  let cart = JSON.parse(localStorage.getItem('hoobylandCart')) || [];
+  let wishlist = JSON.parse(localStorage.getItem('hoobylandWishlist')) || [];
+
+  function saveCart() {
+    localStorage.setItem('hoobylandCart', JSON.stringify(cart));
+  }
+  function saveWishlist() {
+    localStorage.setItem('hoobylandWishlist', JSON.stringify(wishlist));
+  }
+
+  function updateCart() {
+    document.getElementById("cartCount").innerText = cart.length;
+    const container = document.getElementById("cartItems");
+    if (!container) return;
+    container.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item, i) => {
+      const div = document.createElement("div");
+      div.className = "cart-item";
+      div.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <div class="cart-text">${item.name}<br>$${item.price.toFixed(2)} AUD</div>
+        <span class="remove-btn" onclick="removeFromCart(${i})">×</span>
+      `;
+      container.appendChild(div);
+      requestAnimationFrame(() => div.classList.add('visible'));
+      total += item.price;
+    });
+
+    const totalElement = document.getElementById("cartTotal");
+    if (totalElement) {
+      totalElement.innerText = "Total: $" + total.toFixed(2) + " AUD";
+    }
+  }
+
+  function updateWishlistModal() {
+    const container = document.getElementById("wishlistItems");
+    if (!container) return;
+    container.innerHTML = "";
+    wishlist.forEach((item, i) => {
+      const div = document.createElement("div");
+      div.className = "wishlist-item";
+      div.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <div class="wishlist-text">${item.name}<br>$${item.price.toFixed(2)} AUD</div>
+        <button class="btn btn-blue" onclick="addToCart('${item.name}',${item.price},'${item.image}'); removeFromWishlist(${i})">Add to Cart</button>
+        <span class="remove-btn" onclick="removeFromWishlist(${i})">×</span>
+      `;
+      container.appendChild(div);
+      requestAnimationFrame(() => div.classList.add('visible'));
+    });
+  }
+
+  function addToCart(name, price, image) {
+    cart.push({name, price, image});
+    saveCart();
+    updateCart();
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    saveCart();
+    updateCart();
+  }
+
+  function toggleWishlist(name, price, image) {
+    const idx = wishlist.findIndex(item => item.name === name);
+    if (idx === -1) {
+      wishlist.push({name,price,image});
+      alert(name + " added to wishlist!");
+    } else {
+      wishlist.splice(idx,1);
+      alert(name + " removed from wishlist!");
+    }
+    saveWishlist();
+    updateWishlistModal();
+  }
+
+  function removeFromWishlist(index) {
+    wishlist.splice(index,1);
+    saveWishlist();
+    updateWishlistModal();
+  }
+
+  function checkout() {
+    if (cart.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+    cart = [];
+    saveCart();
+    updateCart();
+    $("#cartModal").modal("hide");
+    alert("Thank you for your purchase!");
+  }
+
+  function continueShopping() {
+    $("#cartModal").modal("hide");
+    document.getElementById("shop").scrollIntoView({ behavior: "smooth" });
+  }
+
+  document.getElementById('shopSearch').addEventListener('input', function(e) {
+    const value = e.target.value.toLowerCase();
+    document.querySelectorAll('.shop-item').forEach(item => {
+      const name = item.getAttribute('data-name').toLowerCase();
+      const price = item.getAttribute('data-price');
+      item.style.display = name.includes(value) || price.includes(value) ? '' : 'none';
+    });
+  });
+
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  darkModeToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.body.classList.toggle('dark-mode');
+    document.getElementById('mainNavbar').classList.toggle('dark-mode');
+    localStorage.setItem('hoobylandDarkMode', document.body.classList.contains('dark-mode'));
+  });
+  if (localStorage.getItem('hoobylandDarkMode') === 'true') {
+    document.body.classList.add('dark-mode');
+    document.getElementById('mainNavbar').classList.add('dark-mode');
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-section').forEach(el => observer.observe(el));
+</script>
+
